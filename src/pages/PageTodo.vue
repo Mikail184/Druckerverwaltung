@@ -16,7 +16,9 @@
       style="height: 220px; max-width: 100%;"
     >
 
+    <!-- https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Object/keys -->
     <q-list v-if="Object.keys(tasksTodo).length" separator bordered>
+      <!-- Passes down the id/task into the task component -->
       <task v-for="(task, key) in tasksTodo" :key="key" :task="task" :id="key"></task>
     </q-list>
     </q-scroll-area>
@@ -24,12 +26,12 @@
     <q-banner class="text-white bg-green-4 text-center q-mt-lg">
       <span class="text-bold text-subtitle1">ACTIVATED</span> 
     </q-banner>
-
+    <!-- https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Object/keys -->
     <q-list v-if="Object.keys(tasksCompleted).length" separator bordered>
       <task v-for="(task, key) in tasksCompleted" :key="key" :task="task" :id="key"></task>
     </q-list>
 
-
+    <!-- Opens the  -->
     <div class="fixed-bottom-right text-center q-ma-xl no-pointer-events">
       <q-btn @click="showAddTask = true" round color="primary" class="q-mr-xl all-pointer-events" size="20px" icon="add" />
     </div>
@@ -64,10 +66,14 @@ export default {
       }
     };
   },
+
   computed: {
+    // 'Imports' the Getters from the store-tasks.js file
     ...mapGetters("tasks", ["tasksTodo", "tasksCompleted"])
   },
+
   components: {
+    // HTML Tags
 	"task": require("components/Tasks/Task.vue").default,
 	"add-task": require("components/Modals/AddTask.vue").default,
   "search": require("components/Tools/Search.vue").default,

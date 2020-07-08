@@ -1,7 +1,7 @@
 <template>
   <q-card>
     <modal-header>Add Task</modal-header>
-
+    <!-- .prevent prevents the page from reloading -->
     <q-form @submit.prevent="submitTask">
       <modal-task-name :name.sync="taskToSubmit.name"></modal-task-name>
       <modal-due-date :dueDate.sync="taskToSubmit.dueDate"></modal-due-date>

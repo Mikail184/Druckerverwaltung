@@ -9,13 +9,16 @@ const state = {
 	sort: 'dueDate'
 }
 
+// Can't be asynchronous
 const mutations = {
 	updateTask(state, payload) {
 		Object.assign(state.tasks[payload.id], payload.updates)
 	},
+	// https://vuejs.org/v2/api/#Vue-delete
 	deleteTask(state, id) {
 		Vue.delete(state.tasks, id)
 	},
+	// https://stackoverflow.com/questions/36671106/what-is-the-difference-between-vm-set-and-vue-set
 	addTask(state, payload) {
 		Vue.set(state.tasks, payload.id, payload.task)
 	},
@@ -30,6 +33,7 @@ const mutations = {
 	},
 }
 
+// Can be asynchronous and always expect an Object
 const actions = {
 	updateTask({ dispatch }, payload) {
 		dispatch('fbUpdateTask', payload)
@@ -38,6 +42,8 @@ const actions = {
 		dispatch('fbDeleteTask', id)
 	},
 	addTask({ dispatch }, task) {
+		// uid() generates a unique ID
+		// https://quasar.dev/quasar-utils/other-utils#Generate-UID
 		let taskId = uid()
 		let payload = {
 			id: taskId,
@@ -113,7 +119,11 @@ const actions = {
 	},
 }
 
+// Get's data from the state and can manipulate it before passing it further
 const getters = {
+	// https://serversideup.net/sorting-in-vuejs-components-and-vuex-state/
+	// https://stackoverflow.com/questions/56047923/how-to-sort-data-in-vuex-state-with-mutation
+	// https://www.youtube.com/watch?v=OjS6SWS6G5c
 	tasksSorted: (state) => {
 		let tasksSorted = {},
 			keysOrdered = Object.keys(state.tasks)
@@ -169,6 +179,7 @@ const getters = {
 	},
 }
 
+// https://stackoverflow.com/questions/47792212/what-exactly-is-namespacing-of-modules-in-vuex
 export default {
 	namespaced: true,
 	state,

@@ -1,4 +1,5 @@
 <template>
+  <!-- updateTask marks the clicked task as completed, see store-tasks.js -->
   <q-item
     @click="updateTask({ id: id, updates: { completed: !task.completed } })"
     :class="!task.completed ? 'bg-orange-1' : 'bg-green-1'"
@@ -29,8 +30,8 @@
 
     <q-item-section side>
       <div class="row">
+        <!-- Click.stop stops the click handler from the parent (completed) -->
         <q-btn @click.stop="showEditTask = true" flat round dense color="primary" icon="edit" />
-
         <q-btn @click.stop="promptToDelete(id)" flat round dense color="red-10" icon="delete" />
       </div>
     </q-item-section>
@@ -55,6 +56,7 @@ export default {
     ...mapState('tasks', ['search'])
   },
   filters: {
+    // https://jsfiddle.net/HubertWang/t5ac1quc/
     searchHighlight(value, search) {
       if(search) {
         let searchRegExp = new RegExp(search, 'ig')
@@ -65,6 +67,7 @@ export default {
   },
   methods: {
     ...mapActions("tasks", ["updateTask", "deleteTask"]),
+    // https://quasar.dev/vue-components/dialog
     promptToDelete(id) {
       this.$q
         .dialog({

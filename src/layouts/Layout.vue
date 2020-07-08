@@ -2,15 +2,12 @@
   <q-layout view="hHh lpR fFf">
     <q-header elevated>
       <q-toolbar class="bg-primary">
-
         <q-toolbar-title class="absolute-center">
-          X-Business SN Activation
+          Druckerverwaltung
         </q-toolbar-title>
-
+        <!-- Shows either Login or Register Button depending wether User is logged in or not (from Localstorage) -->
          <q-btn v-if= "!loggedIn" to="/auth" class="absolute-right" color="primary" icon-right="login" label="Login" unelevated />
          <q-btn v-if= "loggedIn" @click="logoutUser" class="absolute-right" color="primary" icon-right="clear" label="Logout" unelevated />
-
-
       </q-toolbar>
     </q-header>
 
@@ -32,9 +29,8 @@
       :width="250"
       bordered
       content-class="bg-secondary"
-    >
+      >
       <q-list dark>
-
         <q-item
           v-for="nav in navs"
           :key="nav.label"
@@ -49,7 +45,6 @@
             <q-item-label>{{ nav.label }}</q-item-label>
           </q-item-section>
         </q-item>
-        
       </q-list>
     </q-drawer>
 
@@ -93,6 +88,7 @@
 </script>
 
 <style lang="scss">
+// Hides footer if screen size is below 768px
   @media screen and (min-width: 768px) {
     .q-footer {
       display: none;

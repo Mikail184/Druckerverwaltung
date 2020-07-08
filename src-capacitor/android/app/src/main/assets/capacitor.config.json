@@ -1,0 +1,10 @@
+{
+  "appId": "org.cordova.quasar.app",
+  "appName": "X-Business",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "server": {
+    "url": "http://192.168.5.120:8080"
+  }
+}
